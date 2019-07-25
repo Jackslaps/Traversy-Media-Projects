@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/layout/NavBar";
 //import UserItem from './components/users/UserItem'
 import Users from "./components/users/Users";
+import Search from "./components/users/Search"
 import axios from "axios";
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
         {/* but the requirement for the prop in Navbar.js is for strings only */}
         <Navbar />
         <div className="container">
+          <Search />
           <Users loading={ this.state.loading } users={ this.state.users }/>
         </div>
         {/* <UserItem /> */}
