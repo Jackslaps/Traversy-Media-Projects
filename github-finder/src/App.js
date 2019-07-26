@@ -12,13 +12,22 @@ class App extends Component {
     loading: false
   };
 
-  async componentDidMount() {
-		this.setState({ loading: true });
+  // This will load up a large list of profiles as part of the state at first
+  // async componentDidMount() {
+	// 	this.setState({ loading: true });
 
-		const res = await axios.get(`https://api.github.com/users?client_id=${ process.env.REACT_APP_GITHUB_CLIENT_ID }&client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_ID }`);
+	// 	const res = await axios.get(`https://api.github.com/users?client_id=${ process.env.REACT_APP_GITHUB_CLIENT_ID }&client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_ID }`);
 		
-		this.setState({ users: res.data, loading: false })
-    console.log(res.data);
+	// 	this.setState({ users: res.data, loading: false })
+  //   console.log(res.data);
+  // }
+
+  // Search Github Users -> On search, will display profile link of Github account being searched for
+  searchUsers = async text => {
+    this.setState({ loading: true })
+    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${ process.env.REACT_APP_GITHUB_CLIENT_ID }&client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_ID }`);
+		
+		this.setState({ users: res.data.items, loading: false })
   }
 
   render() {
@@ -31,7 +40,7 @@ class App extends Component {
         {/* but the requirement for the prop in Navbar.js is for strings only */}
         <Navbar />
         <div className="container">
-          <Search />
+          <Search searchUsers={ this.searchUsers }/>
           <Users loading={ this.state.loading } users={ this.state.users }/>
         </div>
         {/* <UserItem /> */}
