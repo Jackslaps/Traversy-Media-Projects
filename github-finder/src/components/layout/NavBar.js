@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 
 const NavBar = ({ icon, title }) => {
   return (
@@ -7,6 +8,24 @@ const NavBar = ({ icon, title }) => {
       <h1>
         <i className={icon} /> {title}
       </h1>
+      <ul>
+        <li>
+          <Link to='/'>Home</Link>
+        </li>
+        <li>
+          <Link to='/about'>About</Link>
+        </li>
+      </ul>
+
+      {/* VV This resets the state and doesnt allow the search to persist when switching pages */}
+      {/* <ul>
+        <li>
+          <a href='/'>Home</a>
+        </li>
+        <li>
+          <a href='/about'>About</a>
+        </li>
+      </ul> */}
     </nav>
   );
 };
