@@ -1,24 +1,27 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, useEffect } from "react";
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Repos from '../repos/Repos';
 
-export class User extends Component {
-  componentDidMount() {
-    this.props.getUser(this.props.match.params.login);
-    this.props.getUserRepos(this.props.match.params.login);
-  }
+const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
+  useEffect(() => {
+    getUser(match.params.login);
+    getUserRepos(match.params.login);
+    //eslint-disable-next-line
+  }, []);
 
-  static propTypes = {
-    loading: PropTypes.bool,
-    user: PropTypes.object.isRequired,
-    repos: PropTypes.array.isRequired,
-    getUser: PropTypes.func.isRequired,
-    getUserRepos: PropTypes.func.isRequired,
-  };
+  // Empty bracket allows for conditional stops, but as an empty array it acts
+  // as if it were componentDidMount()
+  // The eslint disable line removes error where dependencies are being asked for 
+  // that normally go within the empty array. In this case, it is asking for getUser
+  // and getUserRepos, which if added will break the application in an endless loop
+  
+  // componentDidMount() {
+  //   this.props.getUser(match.params.login);
+  //   this.props.getUserRepos(match.params.login);
+  // }
 
-  render() {
     const {
       name,
       avatar_url,
@@ -33,9 +36,7 @@ export class User extends Component {
       public_gists,
 			hireable,
       company,
-    } = this.props.user;
-
-    const { loading, repos } = this.props;
+    } = user;
 
     if (loading) return <Spinner />;
 
@@ -100,7 +101,15 @@ export class User extends Component {
       </Fragment>
     );
   }
-}
+
+User.propTypes = {
+  loading: PropTypes.bool,
+  user: PropTypes.object.isRequired,
+  repos: PropTypes.array.isRequired,
+  getUser: PropTypes.func.isRequired,
+  getUserRepos: PropTypes.func.isRequired,
+};
+
 
 export default User;
 
