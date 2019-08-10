@@ -38,17 +38,6 @@ const App = () => {
   //   console.log(res.data);
   // }
 
-  // Search Github Users -> On search, will display profile link of Github account being searched for
-  const searchUsers = async text => {
-    setLoading(true);
-    // this.setState({ loading: true });
-
-    const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_ID}`
-    );
-
     setUsers(res.data.items);
     setLoading(false);
     // this.setState({ users: res.data.items, loading: false });
@@ -121,7 +110,6 @@ const App = () => {
                 render={props => (
                   <Fragment>
                     <Search
-                      searchUsers={searchUsers}
                       clearUsers={clearUsers}
                       showClear={users.length > 0 ? true : false}
                       setAlert={showAlert}
