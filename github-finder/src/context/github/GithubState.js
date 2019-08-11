@@ -5,7 +5,7 @@ import GithubReducer from "./githubReducer";
 import {
   SEARCH_USERS,
   SET_LOADING,
-  CLEAR_USER,
+  CLEAR_USERS,
   GET_USER,
   GET_REPOS
 } from "../types";
@@ -21,7 +21,6 @@ const GithubState = props => {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
   // Search Users
-  // Search Github Users -> On search, will display profile link of Github account being searched for
   const searchUsers = async text => {
     setLoading();
     // this.setState({ loading: true });
@@ -38,8 +37,24 @@ const GithubState = props => {
     })
   };
 
+  // Clear Users
+  const clearUsers = () => dispatch({ type: CLEAR_USERS})
+  
   // Get User
+  const getUser = async username => {
+    setLoading();
 
+    const res = await axios.get(
+      `https://api.github.com/users/${username}?client_id=${
+        process.env.REACT_APP_GITHUB_CLIENT_ID
+      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_ID}`
+    );
+    
+    dispatch({
+      type: GET_USER,
+      payload: res.data
+    })
+  };
   // Get Repos
 
   // Set Loading
@@ -52,7 +67,9 @@ const GithubState = props => {
         user: state.user,
         repos: state.repos,
         loading: state.loading,
-        searchUsers
+        searchUsers,
+        clearUsers,
+        getUser
       }}
     >
       {props.children}
