@@ -5,10 +5,15 @@ import {
 	GET_USER,
 	GET_REPOS
 } from "../types";
-import { stat } from "fs";
 
 export default (state, action) => {
 	switch(action.type) {
+		case GET_REPOS:
+			return {
+				...state,
+				repos: action.payload,
+				loading: false
+			}
 		case GET_USER:
 			return {
 				...state,
