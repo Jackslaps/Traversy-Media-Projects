@@ -74,4 +74,11 @@ val = str.replace('Brad', 'Jack'); // Hello there my name is Jack
 val = str.includes('Hello'); // true
 val = str.includes('Foo'); // false
 
+val = "          Hello World";
+x = val.trim() // Returns "Hello World" but cuts out all the excess white space
+
+x = val.replace('World', "John"); // Replaces "World" with "John"
+
+x = val.includes('Hello'); // Returns a boolean value (true in this example) if what's being searched for is in the string
+ 
 console.log(val);

@@ -73,6 +73,9 @@ val = 5;
     console.log(val.toFixed())  => 5
     */
 
+val = +val;
+    // Shortcut to change strings to numbers
+
 val = Number('5');
     /*
     console.log(val);           => 5

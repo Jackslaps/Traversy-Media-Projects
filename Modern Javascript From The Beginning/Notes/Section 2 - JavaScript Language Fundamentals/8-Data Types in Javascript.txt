@@ -2,7 +2,7 @@ Primitive Data Types vs Reference Types
 
 Primitive Data Types:
     - Data is stored directly in the location the variable accesses
-    - Stored on the stack -> When you access primitive data types you access is actual stored value
+    - Stored on the stack -> When you access primitive data types you access its actual stored value
     Types:
         Strings
         Number -> Integers, decimals, floats are all considered "numbers," other languages have separate types of numbers

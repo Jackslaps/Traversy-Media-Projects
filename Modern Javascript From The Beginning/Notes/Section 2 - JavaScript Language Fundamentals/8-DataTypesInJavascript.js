@@ -12,6 +12,8 @@ const hasKids = true;
 // NULL
 const car = null;
 
+// Reason why Null is an object: https://stackoverflow.com/questions/801032/why-is-null-an-object-and-whats-the-difference-between-null-and-undefined
+
 // Undefined
 let test;
 

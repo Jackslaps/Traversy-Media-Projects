@@ -8,6 +8,7 @@ val = num1 * num2; // 5000
 val = num1 - num2; // 50
 val = num1 / num2; // 2
 val = num1 % num2; // 0
+val = num1 ** num2; // Exponent
 
 // Math Object
 
